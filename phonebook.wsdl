@@ -1,0 +1,279 @@
+
+<?xml version="1.0"?>
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="urn:ipbx-phonebook" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap-enc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" name="Phonebook" targetNamespace="urn:ipbx-phonebook">
+  <types>
+    <xsd:schema targetNamespace="urn:ipbx-phonebook" elementFormDefault="qualified">
+      <xsd:import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
+      <xsd:element name="list">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="from" type="xsd:string"/>
+            <xsd:element name="filter" type="xsd:string" nillable="true"/>
+            <xsd:element name="sort" type="xsd:string" nillable="true"/>
+            <xsd:element name="page" type="xsd:int" nillable="true"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:complexType name="IpbxOutputContactList">
+        <xsd:all>
+          <xsd:element name="PhoneBookId" type="xsd:int"/>
+          <xsd:element name="PhoneBookUserId" type="xsd:int"/>
+          <xsd:element name="PhoneBookGroupId" type="xsd:int"/>
+          <xsd:element name="PhoneBookSubsidiaryId" type="xsd:int"/>
+          <xsd:element name="UserFirstnameLastname" type="xsd:string"/>
+          <xsd:element name="PhoneBookFirstname" type="xsd:string"/>
+          <xsd:element name="PhoneBookLastname" type="xsd:string"/>
+          <xsd:element name="PhoneBookCompany" type="xsd:int"/>
+          <xsd:element name="PhoneBookCategory" type="xsd:int"/>
+          <xsd:element name="PhoneBookStandardPhone" type="xsd:string"/>
+          <xsd:element name="PhoneBookDirectPhone" type="xsd:string"/>
+          <xsd:element name="PhoneBookFax" type="xsd:string"/>
+          <xsd:element name="PhoneBookMobile" type="xsd:string"/>
+          <xsd:element name="PhoneBookPersoPhone" type="xsd:string"/>
+          <xsd:element name="PhoneBookPersoMobile" type="xsd:string"/>
+          <xsd:element name="PhoneBookEmail" type="xsd:string"/>
+          <xsd:element name="PhoneBookAddressNum" type="xsd:string"/>
+          <xsd:element name="PhoneBookAddressName1" type="xsd:string"/>
+          <xsd:element name="PhoneBookAddressName2" type="xsd:string"/>
+          <xsd:element name="PhoneBookAddressZipCode" type="xsd:string"/>
+          <xsd:element name="PhoneBookAddressCity" type="xsd:string"/>
+          <xsd:element name="PhoneBookAddressCountry" type="xsd:string"/>
+          <xsd:element name="PhoneBookPictureId" type="xsd:int"/>
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfIpbxOutputContactList">
+        <xsd:complexContent>
+          <xsd:restriction base="soap-enc:Array">
+            <xsd:attribute ref="soap-enc:arrayType" wsdl:arrayType="tns:IpbxOutputContactList[]"/>
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="IpbxOutputContacts">
+        <xsd:all>
+          <xsd:element name="CurrentPage" type="xsd:int"/>
+          <xsd:element name="TotalPage" type="xsd:int"/>
+          <xsd:element name="Contacts" type="tns:ArrayOfIpbxOutputContactList"/>
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:element name="listResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="response" type="tns:IpbxOutputContacts"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:complexType name="IpbxInputContact">
+        <xsd:all>
+          <xsd:element name="PhoneBookId" type="xsd:int"/>
+          <xsd:element name="PhoneBookUserId" type="xsd:string"/>
+          <xsd:element name="PhoneBookGroupId" type="xsd:string"/>
+          <xsd:element name="PhoneBookSubsidiaryId" type="xsd:string"/>
+          <xsd:element name="PhoneBookContactType" type="xsd:string"/>
+          <xsd:element name="PhoneBookFirstname" type="xsd:string"/>
+          <xsd:element name="PhoneBookLastname" type="xsd:string"/>
+          <xsd:element name="PhoneBookCompany" type="xsd:int"/>
+          <xsd:element name="PhoneBookCategory" type="xsd:int"/>
+          <xsd:element name="PhoneBookStandardPhone" type="xsd:string"/>
+          <xsd:element name="PhoneBookDirectPhone" type="xsd:string"/>
+          <xsd:element name="PhoneBookFax" type="xsd:string"/>
+          <xsd:element name="PhoneBookMobile" type="xsd:string"/>
+          <xsd:element name="PhoneBookPersoPhone" type="xsd:string"/>
+          <xsd:element name="PhoneBookPersoMobile" type="xsd:string"/>
+          <xsd:element name="PhoneBookEmail" type="xsd:string"/>
+          <xsd:element name="PhoneBookAddressNum" type="xsd:string"/>
+          <xsd:element name="PhoneBookAddressName1" type="xsd:string"/>
+          <xsd:element name="PhoneBookAddressName2" type="xsd:string"/>
+          <xsd:element name="PhoneBookAddressZipCode" type="xsd:string"/>
+          <xsd:element name="PhoneBookAddressCity" type="xsd:string"/>
+          <xsd:element name="PhoneBookAddressCountry" type="xsd:string"/>
+          <xsd:element name="PhoneBookPhoto" type="xsd:string"/>
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:element name="add">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="input" type="tns:IpbxInputContact"/>
+            <xsd:element name="from" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:complexType name="IpbxItfError">
+        <xsd:all>
+          <xsd:element name="ErrorName" type="xsd:string"/>
+          <xsd:element name="ErrorValue" type="xsd:string"/>
+          <xsd:element name="ErrorParameter" type="xsd:string"/>
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfIpbxItfError">
+        <xsd:complexContent>
+          <xsd:restriction base="soap-enc:Array">
+            <xsd:attribute ref="soap-enc:arrayType" wsdl:arrayType="tns:IpbxItfError[]"/>
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="IpbxItfResult">
+        <xsd:all>
+          <xsd:element name="code" type="xsd:string"/>
+          <xsd:element name="ErrorList" type="tns:ArrayOfIpbxItfError"/>
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:element name="addResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="response" type="tns:IpbxItfResult"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="update">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="input" type="tns:IpbxInputContact"/>
+            <xsd:element name="from" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="updateResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="response" type="tns:IpbxItfResult"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="get">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="phoneId" type="xsd:int"/>
+            <xsd:element name="from" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:complexType name="IpbxOutputContact">
+        <xsd:all>
+          <xsd:element name="PhoneBookId" type="xsd:int"/>
+          <xsd:element name="PhoneBookUserId" type="xsd:int"/>
+          <xsd:element name="PhoneBookGroupId" type="xsd:int"/>
+          <xsd:element name="PhoneBookSubsidiaryId" type="xsd:int"/>
+          <xsd:element name="PhoneBookContactType" type="xsd:string"/>
+          <xsd:element name="PhoneBookContactUser" type="xsd:string"/>
+          <xsd:element name="PhoneBookContactGroup" type="xsd:string"/>
+          <xsd:element name="PhoneBookContactSubsidiary" type="xsd:string"/>
+          <xsd:element name="PhoneBookFirstname" type="xsd:string"/>
+          <xsd:element name="PhoneBookLastname" type="xsd:string"/>
+          <xsd:element name="PhoneBookCompany" type="xsd:int"/>
+          <xsd:element name="PhoneBookCategory" type="xsd:int"/>
+          <xsd:element name="PhoneBookStandardPhone" type="xsd:string"/>
+          <xsd:element name="PhoneBookDirectPhone" type="xsd:string"/>
+          <xsd:element name="PhoneBookFax" type="xsd:string"/>
+          <xsd:element name="PhoneBookMobile" type="xsd:string"/>
+          <xsd:element name="PhoneBookPersoPhone" type="xsd:string"/>
+          <xsd:element name="PhoneBookPersoMobile" type="xsd:string"/>
+          <xsd:element name="PhoneBookEmail" type="xsd:string"/>
+          <xsd:element name="PhoneBookAddressNum" type="xsd:string"/>
+          <xsd:element name="PhoneBookAddressName1" type="xsd:string"/>
+          <xsd:element name="PhoneBookAddressName2" type="xsd:string"/>
+          <xsd:element name="PhoneBookAddressZipCode" type="xsd:string"/>
+          <xsd:element name="PhoneBookAddressCity" type="xsd:string"/>
+          <xsd:element name="PhoneBookAddressCountry" type="xsd:string"/>
+          <xsd:element name="PhoneBookPhoto" type="xsd:string"/>
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:element name="getResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="response" type="tns:IpbxOutputContact"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+  </types>
+  <portType name="PhonebookPort">
+    <operation name="list">
+      <documentation>renvoie une liste des contacts</documentation>
+      <input message="tns:listIn"/>
+      <output message="tns:listOut"/>
+    </operation>
+    <operation name="add">
+      <documentation>Ajoute une entr&#xE9;e dans l'annuaire</documentation>
+      <input message="tns:addIn"/>
+      <output message="tns:addOut"/>
+    </operation>
+    <operation name="update">
+      <documentation>Modifie une entr&#xE9;e dans l'annuaire</documentation>
+      <input message="tns:updateIn"/>
+      <output message="tns:updateOut"/>
+    </operation>
+    <operation name="get">
+      <documentation>R&#xE9;cup&#xE8;re une entr&#xE9;e dans l'annuaire</documentation>
+      <input message="tns:getIn"/>
+      <output message="tns:getOut"/>
+    </operation>
+  </portType>
+  <binding name="PhonebookBinding" type="tns:PhonebookPort">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="list">
+      <soap:operation soapAction="urn:ipbx-phonebook#list"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="add">
+      <soap:operation soapAction="urn:ipbx-phonebook#add"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="update">
+      <soap:operation soapAction="urn:ipbx-phonebook#update"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="get">
+      <soap:operation soapAction="urn:ipbx-phonebook#get"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+  </binding>
+  <service name="PhonebookService">
+    <port name="PhonebookPort" binding="tns:PhonebookBinding">
+      <soap:address location="urn:ipbx-phonebook"/>
+    </port>
+  </service>
+  <message name="listIn">
+    <part name="parameters" element="tns:list"/>
+  </message>
+  <message name="listOut">
+    <part name="parameters" element="tns:listResponse"/>
+  </message>
+  <message name="addIn">
+    <part name="parameters" element="tns:add"/>
+  </message>
+  <message name="addOut">
+    <part name="parameters" element="tns:addResponse"/>
+  </message>
+  <message name="updateIn">
+    <part name="parameters" element="tns:update"/>
+  </message>
+  <message name="updateOut">
+    <part name="parameters" element="tns:updateResponse"/>
+  </message>
+  <message name="getIn">
+    <part name="parameters" element="tns:get"/>
+  </message>
+  <message name="getOut">
+    <part name="parameters" element="tns:getResponse"/>
+  </message>
+</definitions>
