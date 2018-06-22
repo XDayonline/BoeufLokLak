@@ -1,0 +1,287 @@
+<?xml version="1.0"?>
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="urn:ipbx-session" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap-enc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" name="Session" targetNamespace="urn:ipbx-session">
+  <types>
+    <xsd:schema targetNamespace="urn:ipbx-session" elementFormDefault="qualified">
+      <xsd:import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
+      <xsd:element name="login">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="user" type="xsd:string"/>
+            <xsd:element name="passwd" type="xsd:string"/>
+            <xsd:element name="mode" type="xsd:string" nillable="true"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:complexType name="login">
+        <xsd:all>
+          <xsd:element name="logged" type="xsd:int"/>
+          <xsd:element name="session" type="xsd:string"/>
+          <xsd:element name="user_id" type="xsd:int"/>
+          <xsd:element name="language" type="xsd:int"/>
+          <xsd:element name="id_view" type="xsd:int"/>
+          <xsd:element name="number" type="xsd:int"/>
+          <xsd:element name="mode" type="xsd:string"/>
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:element name="loginResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="response" type="tns:login"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="language">
+        <xsd:complexType/>
+      </xsd:element>
+      <xsd:element name="languageResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="response" type="xsd:int"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="logged">
+        <xsd:complexType/>
+      </xsd:element>
+      <xsd:element name="loggedResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="response" type="xsd:int"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="maintenance">
+        <xsd:complexType/>
+      </xsd:element>
+      <xsd:element name="maintenanceResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="response" type="xsd:int"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="logout">
+        <xsd:complexType/>
+      </xsd:element>
+      <xsd:element name="logoutResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="response" type="xsd:int"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="menu">
+        <xsd:complexType/>
+      </xsd:element>
+      <xsd:complexType name="Func">
+        <xsd:all>
+          <xsd:element name="FuncId" type="xsd:int"/>
+          <xsd:element name="FuncName" type="xsd:string"/>
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfFunc">
+        <xsd:complexContent>
+          <xsd:restriction base="soap-enc:Array">
+            <xsd:attribute ref="soap-enc:arrayType" wsdl:arrayType="tns:Func[]"/>
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="PageItem">
+        <xsd:all>
+          <xsd:element name="PageId" type="xsd:int"/>
+          <xsd:element name="PageName" type="xsd:string"/>
+          <xsd:element name="PageDescription" type="xsd:string"/>
+          <xsd:element name="PageClass" type="xsd:string"/>
+          <xsd:element name="Funcs" type="tns:ArrayOfFunc"/>
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfPageItem">
+        <xsd:complexContent>
+          <xsd:restriction base="soap-enc:Array">
+            <xsd:attribute ref="soap-enc:arrayType" wsdl:arrayType="tns:PageItem[]"/>
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="MenuItem">
+        <xsd:all>
+          <xsd:element name="MenuName" type="xsd:string"/>
+          <xsd:element name="PageItems" type="tns:ArrayOfPageItem"/>
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfMenuItem">
+        <xsd:complexContent>
+          <xsd:restriction base="soap-enc:Array">
+            <xsd:attribute ref="soap-enc:arrayType" wsdl:arrayType="tns:MenuItem[]"/>
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:element name="menuResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="response" type="tns:ArrayOfMenuItem"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="userSite">
+        <xsd:complexType/>
+      </xsd:element>
+      <xsd:element name="userSiteResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="response" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+  </types>
+  <portType name="SessionPort">
+    <operation name="login">
+      <documentation>Effectue le login d'un user</documentation>
+      <input message="tns:loginIn"/>
+      <output message="tns:loginOut"/>
+    </operation>
+    <operation name="language">
+      <documentation>r&#xE9;cup&#xE8;re la lang de l'user</documentation>
+      <input message="tns:languageIn"/>
+      <output message="tns:languageOut"/>
+    </operation>
+    <operation name="logged">
+      <documentation>D&#xE9;termine s'il s'agit d'une requ&#xEA;te loggu&#xE9;e</documentation>
+      <input message="tns:loggedIn"/>
+      <output message="tns:loggedOut"/>
+    </operation>
+    <operation name="maintenance">
+      <documentation>D&#xE9;termine si le syst&#xE8;me est en maintenance</documentation>
+      <input message="tns:maintenanceIn"/>
+      <output message="tns:maintenanceOut"/>
+    </operation>
+    <operation name="logout">
+      <documentation>Termine une session</documentation>
+      <input message="tns:logoutIn"/>
+      <output message="tns:logoutOut"/>
+    </operation>
+    <operation name="menu">
+      <documentation>R&#xE9;cup&#xE8;re le menu d'une session</documentation>
+      <input message="tns:menuIn"/>
+      <output message="tns:menuOut"/>
+    </operation>
+    <operation name="userSite">
+      <documentation>R&#xE9;cup&#xE8;re l'identifiant de l'utilisateur</documentation>
+      <input message="tns:userSiteIn"/>
+      <output message="tns:userSiteOut"/>
+    </operation>
+  </portType>
+  <binding name="SessionBinding" type="tns:SessionPort">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="login">
+      <soap:operation soapAction="urn:ipbx-session#login"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="language">
+      <soap:operation soapAction="urn:ipbx-session#language"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="logged">
+      <soap:operation soapAction="urn:ipbx-session#logged"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="maintenance">
+      <soap:operation soapAction="urn:ipbx-session#maintenance"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="logout">
+      <soap:operation soapAction="urn:ipbx-session#logout"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="menu">
+      <soap:operation soapAction="urn:ipbx-session#menu"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="userSite">
+      <soap:operation soapAction="urn:ipbx-session#userSite"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+  </binding>
+  <service name="SessionService">
+    <port name="SessionPort" binding="tns:SessionBinding">
+      <soap:address location="192.168.0.201"/>
+    </port>
+  </service>
+  <message name="loginIn">
+    <part name="parameters" element="tns:login"/>
+  </message>
+  <message name="loginOut">
+    <part name="parameters" element="tns:loginResponse"/>
+  </message>
+  <message name="languageIn">
+    <part name="parameters" element="tns:language"/>
+  </message>
+  <message name="languageOut">
+    <part name="parameters" element="tns:languageResponse"/>
+  </message>
+  <message name="loggedIn">
+    <part name="parameters" element="tns:logged"/>
+  </message>
+  <message name="loggedOut">
+    <part name="parameters" element="tns:loggedResponse"/>
+  </message>
+  <message name="maintenanceIn">
+    <part name="parameters" element="tns:maintenance"/>
+  </message>
+  <message name="maintenanceOut">
+    <part name="parameters" element="tns:maintenanceResponse"/>
+  </message>
+  <message name="logoutIn">
+    <part name="parameters" element="tns:logout"/>
+  </message>
+  <message name="logoutOut">
+    <part name="parameters" element="tns:logoutResponse"/>
+  </message>
+  <message name="menuIn">
+    <part name="parameters" element="tns:menu"/>
+  </message>
+  <message name="menuOut">
+    <part name="parameters" element="tns:menuResponse"/>
+  </message>
+  <message name="userSiteIn">
+    <part name="parameters" element="tns:userSite"/>
+  </message>
+  <message name="userSiteOut">
+    <part name="parameters" element="tns:userSiteResponse"/>
+  </message>
+</definitions>
