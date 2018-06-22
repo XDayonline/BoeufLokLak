@@ -239,7 +239,7 @@
   </binding>
   <service name="SessionService">
     <port name="SessionPort" binding="tns:SessionBinding">
-      <soap:address location="192.168.0.201"/>
+      <soap:address location="http://192.168.0.201/fcgi/ipbx_admin.fcgi"/>
     </port>
   </service>
   <message name="loginIn">
